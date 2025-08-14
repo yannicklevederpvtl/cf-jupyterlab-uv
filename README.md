@@ -37,11 +37,12 @@ Deploy JupyterLab as a web application on Tanzu Platform for Cloud Foundry with 
 
 5. **more advanced Notebook samples**
    
-   - Use Git within JupyterLab to git clone this samples repo
+   - Use Git in JupyterLab to clone this sample repository
    ```bash
    git clone https://github.com/kirtiapte/cf-jupyterlab-samples
    ```
-   Edit `pyproject.toml` with the dependencies prior `CF push` or add these dependencies within JupyterLab terminal using `uv pip install <package>`
+   Edit `pyproject.toml` with dependencies before `CF push` or add these dependencies in the JupyterLab terminal using `uv pip install <package>`
+
    
 
 ## 📁 Project Structure
