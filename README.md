@@ -30,8 +30,8 @@ Deploy JupyterLab as a web application on Tanzu Platform for Cloud Foundry with 
 4. **Notebook sample**
    - Bind your genai chat service named "chat-llm" to your Jupyterlab app (or edit the nobebook accordingly)
     ```bash
-   cf bind-service cf-jupyterlab chat-llm
-   cf restage cf-jupyterlab
+   cf bind-service cf-jupyterlab-uv chat-llm
+   cf restage cf-jupyterlab-uv
     ```
     - Open and use the nbsample notebook in Jupyterlab
 
@@ -51,18 +51,18 @@ Deploy JupyterLab as a web application on Tanzu Platform for Cloud Foundry with 
 ### Resource Allocation
 - **Memory**: 2GB (configurable in `manifest.yml`)
 - **Disk**: 4GB (configurable in `manifest.yml`)
-- **Instances**: 1 (can be scaled up)
+- **Instances**: 1 
 
 ### Python Packages
 Default packages included:
 - JupyterLab 4.2.5
+- jupyterlab-git 0.51.2
 - notebook
 - ipykernel
 - python-dotenv
 - ipywidgets
 - requests
 - openai
-- gradio
 - langchain
 - langchain-openai
 - langchain_experimental
@@ -70,14 +70,11 @@ Default packages included:
 - langchain[docarray]
 - datasets
 - matplotlib
-- google-generativeai
-- anthropic
 - unstructured
-- pydub
 - modal
 - ollama
 
-Add more packages to `requirements.txt` as needed.
+Add more packages to `pyproject.toml` as needed.
 
 ### Security Settings
 ⚠️ **Important**: This configuration disables authentication for simplicity. For production use, enable security features.
@@ -151,7 +148,7 @@ c.NotebookApp.allow_origin = 'https://yourdomain.com'
 ```yaml
 # In manifest.yml
 services:
-  - my-volume-service
+  - my-llm-service
 ```
 
 ## 🐛 Troubleshooting
@@ -175,25 +172,13 @@ services:
 cf apps
 
 # View recent logs
-cf logs cf-jupyterlab --recent
+cf logs cf-jupyterlab-uv --recent
 
 # SSH into the container (if enabled)
-cf ssh cf-jupyterlab
+cf ssh cf-jupyterlab-uv
 
 # Check environment variables
-cf env cf-jupyterlab
-```
-
-## 📈 Scaling
-
-### Horizontal Scaling
-```bash
-cf scale cf-jupyterlab-uv -i 3
-```
-
-### Vertical Scaling
-```bash
-cf scale cf-jupyterlab-uv -m 2G -k 4G
+cf env cf-jupyterlab-uv
 ```
 
 ## 🔄 Updates
