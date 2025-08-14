@@ -1,0 +1,16 @@
+---
+applications:
+  - name: cf-jupyter-uv
+    memory: 2G
+    disk_quota: 4G
+    instances: 1
+    buildpack: https://github.com/yannicklevederpvtl/uv-buildpack.git
+    stack: cflinuxfs4
+    timeout: 180
+    health-check-type: port
+    env:
+      JUPYTER_ENABLE_LAB: "yes"
+      UV_CACHE_DIR: "/tmp/uv-cache"
+      UV_INDEX_URL: "https://pypi.org/simple/"
+    services:
+    - yourmodelservice
