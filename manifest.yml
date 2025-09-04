@@ -1,16 +1,20 @@
 ---
 applications:
   - name: cf-jupyter-uv
-    memory: 2G
-    disk_quota: 4G
-    instances: 1
-    buildpack: https://github.com/yannicklevederpvtl/uv-buildpack.git
-    stack: cflinuxfs4
-    timeout: 180
+    disk-quota: 4G
     health-check-type: port
+    timeout: 180
+    instances: 1
+    memory: 2G
+    default-route: true
+    stack: cflinuxfs4
+    buildpack: https://github.com/yannicklevederpvtl/uv-buildpack.git
     env:
       JUPYTER_ENABLE_LAB: "yes"
-      UV_CACHE_DIR: "/tmp/uv-cache"
-      UV_INDEX_URL: "https://pypi.org/simple/"
+      START_COMMAND_OVERRIDE: "uv run jupyter lab --ip=0.0.0.0 --port=8080 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password='' --ServerApp.disable_check_xsrf=True --ServerApp.allow_remote_access=True --ServerApp.websocket_allow_origin='*' --ServerApp.websocket_allow_origin_pat='.*'"
+      JUPYTER_SERVER_DISABLE_CHECK_XSRF: "true"
+      JUPYTER_SERVER_ALLOW_REMOTE_ACCESS: "true"
+      JUPYTER_SERVER_WEBSOCKET_ALLOW_ORIGIN: "*"
+      JUPYTER_SERVER_WEBSOCKET_ALLOW_ORIGIN_PAT: ".*"
     services:
-    - yourmodelservice
+    - gen-ai-qwen3-ultra
