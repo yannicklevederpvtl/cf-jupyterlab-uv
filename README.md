@@ -153,13 +153,6 @@ c.NotebookApp.allow_origin = 'https://yourdomain.com'
 2. **Volume Services**: Bind persistent storage services
 3. **External Storage**: Use cloud storage APIs (S3, GCS, etc.)
 
-### Example with Volume Service
-```yaml
-# In manifest.yml
-services:
-  - my-llm-service
-```
-
 ## 🐛 Troubleshooting
 
 ### Common Issues
